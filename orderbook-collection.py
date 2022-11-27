@@ -6,8 +6,6 @@ from apscheduler.schedulers.background import BackgroundScheduler
 
 sched = BackgroundScheduler()
 
-#colunm_name
-#[price│quantity│type│timestamp]
 
 def send_sms(msg) :
 
