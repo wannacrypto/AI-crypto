@@ -28,6 +28,14 @@ for i in tqdm(range(head_i, tail_i+1, 1)):
 
     except:
         error_report.append(str(datetime.datetime.fromtimestamp(i))+'.csv')
+        
+for i in tqdm(range(head_i, tail_i+1, 1)):
+    if (i == head_i):
+        merge_df = pd.read_csv('./trade_data/'+'trade_'+str(i)+'.csv')
+        continue
+
+    temp_df = pd.read_csv('./trade_data/'+'trade_'+str(i)+'.csv')
+    merge_df = pd.concat([merge_df, temp_df], axis=0)
 
 merge_df = merge_df.drop_duplicates(['sequential_id'])
 merge_df = merge_df.replace('BID',0)

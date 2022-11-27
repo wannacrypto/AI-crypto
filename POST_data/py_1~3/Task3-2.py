@@ -16,7 +16,7 @@ pd.set_option('display.max_rows', None)
 #2019-05-16 13:32,0.02243481,9568000,107.32,-214764,0
 
 #read csvfile
-trade_df = pd.read_csv("trade.csv")
+# trade_df = pd.read_csv("trade.csv")
 orderbook_df = pd.read_csv("mod_orderbook.csv")
 
 time_stamp_list = []
@@ -41,29 +41,29 @@ for i in range(int(len(orderbook_df)/30)):
     
     mid_price = (top_bid+top_ask)/2
     
-    ask_qty = df_ask['quantity'].mean()
-    bid_qty = df_bid['quantity'].mean()
-    bidPx = df_bid['price'].mean()
+    # ask_qty = df_ask['quantity'].mean()
+    # bid_qty = df_bid['quantity'].mean()
+    # bidPx = df_bid['price'].mean()
     
-    book_price = (ask_qty*bidPx)/bid_qty
-    Bfeature = (book_price - mid_price)
+    # book_price = (ask_qty*bidPx)/bid_qty
+    # Bfeature = (book_price - mid_price)
     
-    Alpha = Bfeature * mid_price
+    # Alpha = Bfeature * mid_price
     
-    mid_price_list.append(mid_price)
-    Bfeature_list.append(Bfeature)
-    Alpha_list.append(Alpha)
+    # mid_price_list.append(mid_price)
+    # Bfeature_list.append(Bfeature)
+    # Alpha_list.append(Alpha)
 
 timestamp_series = pd.Series(time_stamp_list)
 mid_price_list = pd.Series(mid_price_list) 
-Bfeature_list = pd.Series(Bfeature_list)
-Alpha_list = pd.Series(Alpha_list)
+# Bfeature_list = pd.Series(Bfeature_list)
+# Alpha_list = pd.Series(Alpha_list)
 
-result_df = pd.concat([timestamp_series,mid_price_list,Bfeature_list,Alpha_list],axis=1)
+result_df = pd.concat([timestamp_series,mid_price_list],axis=1)
 
-result_df.columns = ['timestamp','mid_price','Bfeature','Alpha']
+result_df.columns = ['timestamp','mid_price']
 
 print(result_df)
 
-result_df.to_csv('./3_2_result.csv',sep=',',index=False)
+result_df.to_csv('./result/3_2_result.csv',sep=',',index=False)
 

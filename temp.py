@@ -1,6 +1,8 @@
+import pandas as pd
+import time
+import os
 import datetime
+from tqdm import tqdm
 
-
-
-print(time)
-print(str(datetime.datetime.fromtimestamp(1669369374))+'.000000')
+merge_df = pd.read_csv('./trade_merge_data/'+'trade_merged'+'.csv')
+merge_df.groupby('timestamp')
