@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/crypto01/crypto_phase2/phase2_venv"
+VIRTUAL_ENV="/home/crypto01/AI_crypto_phase2/phase2_venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

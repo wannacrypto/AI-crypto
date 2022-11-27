@@ -1,4 +1,4 @@
-#!/home/crypto01/crypto_phase2/phase2_venv/bin/python3
+#!/home/crypto01/AI_crypto_phase2/phase2_venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
