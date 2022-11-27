@@ -23,7 +23,7 @@ for i in tqdm(range(head_i, tail_i+1, 1)):
         merge_df = pd.read_csv('./orderbook_data/'+'orderbook_'+str(i)+'.csv')
         date = str(datetime.datetime.fromtimestamp(i))[:10]
         continue
-    try:
+    if(os.path.exists('./orderbook_data/'+'orderbook_'+str(i)+'.csv')):
         temp_df = pd.read_csv('./orderbook_data/'+'orderbook_'+str(i)+'.csv')
         if (str(datetime.datetime.fromtimestamp(i))[:10] != date):
             merge_df.to_csv(
@@ -32,7 +32,7 @@ for i in tqdm(range(head_i, tail_i+1, 1)):
             merge_df = temp_df
         merge_df = pd.concat([merge_df, temp_df], axis=0)
 
-    except:
+    else:
         time_now = str(datetime.datetime.fromtimestamp(i))+'.000000'
         for k in range(10):
             if (k==0):
