@@ -65,10 +65,12 @@ def Book_I():
         top_bid = df_bid.iloc[0]['price']
         top_ask = df_ask.iloc[0]['price']
         
-        try:
-        
-            mid_price = (top_bid+top_ask)/2
+        mid_price = (top_bid+top_ask)/2
 
+        
+        if(mid_price != 0):
+        
+            
             for j in range(int(len(df_bid))):
                 bidqty += df_bid.iloc[j]['quantity']**ratio
                 bidpx += df_bid.iloc[j]['price']*(df_bid.iloc[j]['quantity']**ratio)
@@ -81,7 +83,7 @@ def Book_I():
             book_i = (book_p - mid_price)/interval
             book_i_list.append(book_i)
             
-        except RuntimeWarning:
+        else:
             book_i_list.append(0)
             
     timestamp_series = pd.Series(time_stamp_list)
@@ -103,6 +105,7 @@ def merge():
     result_df = result_df.reset_index(drop=True)
     result_df.to_csv('./result/2022-11-25_26_27-upbit-btc-krw-feature.csv',sep=',',index=False)
     
-# midprice()
-# Book_I()
+midprice()
+Book_I()
+time.sleep(2)
 merge()
