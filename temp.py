@@ -6,13 +6,36 @@ from tqdm import tqdm
 
 pd.set_option('display.max_columns', 100)
 
-def ts_mod(sr):
-    ts = sr['trade_date_utc'] +' '+sr['trade_time_utc']
-    ts = pd.to_datetime(ts)
-    return ts
+trade_df = pd.read_csv("./trade_merge_data/mod_trade.csv").head(2000)
 
+head_ts = pd.to_datetime('2022-11-25 21:30:12')
 
-orderbook_df = pd.read_csv("./trade_merge_data/trade_merged.csv").head(2000)
-orderbook_df = orderbook_df[['trade_date_utc,trade_time_utc','trade_price','trade_volume','ask_bid','sequential_id']]
+for i in range(10):
+    if (i == 0):
+        ts = head_ts
+    print(ts)
+    
+    temp_df = trade_df[trade_df['timestamp'] == str(ts)]
 
-orderbook_df['timestamp']= orderbook_df.apply(ts_mod,axis=1)
+    print(temp_df)
+    
+    if(not(temp_df.empty)):
+        try:
+            bidcnt = temp_df['type'].value_counts()[0]
+            print('bidcnt : ' ,temp_df['type'].value_counts()[0])
+        except:
+            bidcnt = 0
+            print('bidcnt : ' ,bidcnt)
+            
+        try:
+            askcnt = temp_df['type'].value_counts()[1]
+            print('askcnt : ' ,temp_df['type'].value_counts()[1])
+        except:
+            askcnt = 0
+            print('askcnt : ' ,askcnt)
+        
+    else:
+        bidcnt = 0
+        askcnt = 0
+    
+    
