@@ -46,6 +46,8 @@ for i in tqdm(range(head_i, tail_i+1, 1)):
         merge_df = pd.concat([merge_df, temp_df], axis=0)
         error_report.append(str(datetime.datetime.fromtimestamp(i))+'.csv')
 
+merge_df['timestamp'] = merge_df['timestamp'].apply(lambda x:x[:-7])
+
 merge_df.to_csv(
     './orderbook_merge_data/' + date+'-upbit-btc-krw-orderbook.csv',  sep=',', index=False)
 

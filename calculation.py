@@ -29,6 +29,7 @@ def midprice():
         mid_price_list.append(mid_price)
 
     timestamp_series = pd.Series(time_stamp_list)
+    timestamp_series = timestamp_series.apply(lambda x:x[:-6])
     mid_price_list = pd.Series(mid_price_list) 
 
     result_df = pd.concat([timestamp_series,mid_price_list],axis=1)
