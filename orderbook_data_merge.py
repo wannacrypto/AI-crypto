@@ -26,8 +26,9 @@ for i in tqdm(range(head_i, tail_i+1, 1)):
     if(os.path.exists('./orderbook_data/'+'orderbook_'+str(i)+'.csv')):
         temp_df = pd.read_csv('./orderbook_data/'+'orderbook_'+str(i)+'.csv')
         if (str(datetime.datetime.fromtimestamp(i))[:10] != date):
+            merge_df['timestamp'] = merge_df['timestamp'].apply(lambda x:x[:-7])
             merge_df.to_csv(
-                './orderbook_merge_data/' + date+'-upbit-btc-krw-orderbook.csv',  sep=',', index=False)
+                './orderbook_merge_data/' +date+'-upbit-btc-krw-orderbook.csv',  sep=',', index=False)
             date = str(datetime.datetime.fromtimestamp(i))[:10]
             merge_df = temp_df
         merge_df = pd.concat([merge_df, temp_df], axis=0)
