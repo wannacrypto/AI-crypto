@@ -15,7 +15,7 @@ def midprice():
 
     for i in tqdm(range(int(len(orderbook_df)/10))):
         df_order = orderbook_df.loc[10*i:(10*i)+9].reset_index(drop=True)
-        time_stamp_list.append(df_order.loc[0,'timestamp'])
+        time_stamp_list.append(df_order.iloc[0]['timestamp'])
         
         df_bid = df_order.loc[0:4]
         df_ask = df_order.loc[5:9]
@@ -55,7 +55,7 @@ def Book_I():
         askqty = bidqty = askpx = bidpx = book_p = 0
         
         df_order = orderbook_df.loc[10*i:(10*i)+9].reset_index(drop=True)
-        time_stamp_list.append(df_order.loc[0,'timestamp'])
+        time_stamp_list.append(df_order.iloc[0]['timestamp'])
         
         df_bid = df_order.loc[0:4]
         df_ask = df_order.loc[5:9]
