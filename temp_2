@@ -1,0 +1,12 @@
+import pandas as pd
+import time
+import os
+import datetime
+from tqdm import tqdm
+
+pd.set_option('display.max_columns', 100)
+
+
+orderbook_df = pd.read_csv("./trade_merge_data/trade_merged.csv").head(2000)
+
+print(orderbook_df['trade_time_utc'].apply(lambda x : pd.to_datetime(x)))

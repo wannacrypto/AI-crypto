@@ -18,6 +18,11 @@ error_report = []
 
 #bid = 0, ask = 1
 
+def ts_mod(sr):
+    ts = sr['trade_date_utc'] +' '+sr['trade_time_utc']
+    ts = pd.to_datetime(ts)
+    return ts
+
 for i in tqdm(range(head_i, tail_i+1, 1)):
     if (i == head_i):
         merge_df = pd.read_csv('./trade_data/'+'trade_'+str(i)+'.csv')
@@ -30,18 +35,16 @@ for i in tqdm(range(head_i, tail_i+1, 1)):
         error_report.append(str(datetime.datetime.fromtimestamp(i))+'.csv')
         
 for i in tqdm(range(head_i, tail_i+1, 1)):
-    if (i == head_i):
-        merge_df = pd.read_csv('./trade_data/'+'trade_'+str(i)+'.csv')
-        continue
-
     temp_df = pd.read_csv('./trade_data/'+'trade_'+str(i)+'.csv')
     merge_df = pd.concat([merge_df, temp_df], axis=0)
 
+merge_df = merge_df[['trade_date_utc','trade_time_utc','trade_price','trade_volume','ask_bid','sequential_id']]
 merge_df = merge_df.drop_duplicates(['sequential_id'])
 merge_df = merge_df.replace('BID',0)
 merge_df = merge_df.replace('ASK',1)
-merge_df = merge_df.drop(['market'], axis=1)
+merge_df['timestamp'] = merge_df.apply(ts_mod,axis=1)
 merge_df = merge_df.sort_values(by='timestamp').reset_index(drop=True)
+merge_df = merge_df.drop(columns = ['trade_date_utc','trade_time_utc'])
 
 
 merge_df.to_csv(
