@@ -9,7 +9,7 @@ pd.set_option('display.max_columns', 100)
 
 def midprice():
     orderbook_df = pd.read_csv("./orderbook_merge_data/mod_orderbook.csv")
-
+    
     time_stamp_list = []
     mid_price_list = []
 
