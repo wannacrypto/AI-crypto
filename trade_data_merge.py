@@ -2,11 +2,13 @@ import pandas as pd
 import time
 import os
 import datetime
+import natsort
 from tqdm import tqdm
 
 path = './trade_data'
 
 file_list = os.listdir(path)
+file_list = natsort.natsorted(file_list)
 
 head = file_list[0]
 tail = file_list[-1]
