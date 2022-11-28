@@ -33,6 +33,7 @@ for i in tqdm(range(head_i, tail_i+1, 1)):
     try:
         temp_df = pd.read_csv('./trade_data/'+'trade_'+str(i)+'.csv')
         cur_date = temp_df.iloc[0]['trade_date_utc']
+        merge_df = merge_df.drop_duplicates(['sequential_id'])
         
         if(cur_date != date):
             merge_df = merge_df[['trade_date_utc','trade_time_utc','trade_price','trade_volume','ask_bid','sequential_id']]
@@ -43,7 +44,7 @@ for i in tqdm(range(head_i, tail_i+1, 1)):
             merge_df = merge_df.sort_values(by='timestamp').reset_index(drop=True)
             merge_df = merge_df.drop(columns = ['trade_date_utc','trade_time_utc'])
             merge_df.to_csv(
-                './trade_merge_data/'+cur_date+'trade_merged.csv',  sep=',', index=False)
+                './trade_merge_data/'+date+'_trade_merged.csv',  sep=',', index=False)
             
             merge_df = pd.read_csv('./trade_data/'+'trade_'+str(i)+'.csv')
             date = cur_date
