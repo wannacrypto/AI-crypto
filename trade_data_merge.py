@@ -65,6 +65,6 @@ merge_df = merge_df.drop(columns = ['trade_date_utc','trade_time_utc'])
 
 
 merge_df.to_csv(
-    './trade_merge_data/'+date+'trade_merged.csv',  sep=',', index=False)
+    './trade_merge_data/'+cur_date+'trade_merged.csv',  sep=',', index=False)
 
 print(error_report)
