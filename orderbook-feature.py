@@ -245,8 +245,8 @@ def merge():
     result_df = result_df.reset_index(drop=True)
     result_df.to_csv('./result/2022-11-25_26_27-upbit-btc-krw-feature.csv',sep=',',index=False)
     
-# midprice()
-# Book_I()
+midprice()
+Book_I()
 Book_D()
 time.sleep(2)
 merge()
